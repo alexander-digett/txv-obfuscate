@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log('loaded')
+    console.log('loaded5')
   let interacted = false;
   addEventListener('mousemove', () => interacted = true);
   addEventListener('keypress', () => interacted = true);
 
-  const timeout = 30;
+  const timeout = 10;
   let timer = setTimeout(() => {
     timer = null;
   }, timeout * 1000);
@@ -12,16 +12,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const stub = atob('aHR0cHM6Ly90ZXhhcy1ob21lcy5hY3RpdmVob3N0ZWQuY29tL3Byb2MucGhw');
   const form = document.querySelector('#crio-form-form');
 
+  console.log(form)
+
   if (!form) return;
+const submitButton = form.querySelector('.form_submit');
 
-  form.addEventListener('submit', function (event) {
-    const recaptchaResponse = grecaptcha.getResponse();
-    const submitButton = form.querySelector('.form_submit');
-
-    if (!recaptchaResponse) {
-      alert("Please complete the reCAPTCHA before submitting.");
-      return;
-    }
+if (submitButton) {
+  submitButton.addEventListener('click', function (event) {
+    console.log('Submit button clicked');
 
     event.preventDefault();
 
@@ -35,11 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    if (submitButton) {
-      submitButton.removeAttribute('disabled');
-    }
-
     form.setAttribute('action', 'https://app.clinicalresearch.io/web-form-save');
     setTimeout(() => form.submit(), 100);
   });
+}
+  
 });
