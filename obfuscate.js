@@ -1,9 +1,10 @@
 jQuery(document).ready(function ($) {
+    console.log('loaded')
   var interacted = false;
   addEventListener('mousemove', () => interacted = true);
   addEventListener('keypress', () => interacted = true);
 
-  var timeout = 10;
+  var timeout = 30;
   var timer = setTimeout(() => {
       timer = null;
   }, timeout * 1000);
@@ -17,10 +18,6 @@ jQuery(document).ready(function ($) {
       var recaptchaResponse = grecaptcha.getResponse();
       var submitButton = form.querySelector('.form_submit');
 
-      if (!recaptchaResponse) {
-          alert("Please complete the reCAPTCHA before submitting.");
-          return; // Prevent submission but don't disable the button
-      }
 
       event.preventDefault(); // Stop default form submission
 
